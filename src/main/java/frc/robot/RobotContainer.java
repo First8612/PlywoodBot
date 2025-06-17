@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -18,8 +19,8 @@ public class RobotContainer {
     configureBindings();
 
     drivebase.setDefaultCommand(Commands.run(() -> {
-      var xSpeed = controller.getLeftX() * Drivebase.kMaxSpeed;
-      var ySpeed = controller.getLeftY() * Drivebase.kMaxSpeed;
+      var ySpeed = MathUtil.applyDeadband(-controller.getLeftX(), 0.1) * Drivebase.kMaxSpeed;
+      var xSpeed = MathUtil.applyDeadband(-controller.getLeftY(), 0.1) * Drivebase.kMaxSpeed;
       var rotSpeed = controller.getRightX() * Drivebase.kMaxAngularSpeed;
 
       drivebase.drive(xSpeed, ySpeed, rotSpeed);

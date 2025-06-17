@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.commands.HonkCommand;
 import frc.robot.subsystems.Drivebase;
 
 public class RobotContainer {
@@ -25,7 +26,9 @@ public class RobotContainer {
     }, drivebase));
   }
 
-  private void configureBindings() {}
+  private void configureBindings() {
+    controller.leftStick().whileTrue(new HonkCommand());
+  }
 
   public Command getAutonomousCommand() {
     return Commands.print("No autonomous command configured");

@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.DriveRobotCentricCommand;
+import frc.robot.commands.DriveTankCommand;
 import frc.robot.commands.DriveFieldCentricCommand;
 import frc.robot.commands.HonkCommand;
 import frc.robot.subsystems.Drivebase;
@@ -16,7 +17,12 @@ import frc.robot.subsystems.Drivebase;
 public class RobotContainer {
   private Drivebase drivebase = new Drivebase();
   private CommandXboxController controller = new CommandXboxController(0);
-  private Command otherDriveCommand = new DriveRobotCentricCommand(drivebase, controller);
+  private Command[] driveCommands = new Command[] {
+    new DriveFieldCentricCommand(drivebase, controller),
+    new DriveRobotCentricCommand(drivebase, controller),
+    new DriveTankCommand(drivebase, controller)
+  };
+  private int driveModeIndex = 0;
 
   public RobotContainer() {
     configureBindings();
@@ -28,13 +34,15 @@ public class RobotContainer {
     controller.leftStick().whileTrue(new HonkCommand());
 
     controller.b().onTrue(Commands.runOnce(() -> {
-      var previousDriveMode = drivebase.getDefaultCommand();
-      drivebase.setDefaultCommand(otherDriveCommand);
-      otherDriveCommand = previousDriveMode;
-      System.out.print("Switched");
-    }));
+      driveModeIndex++;
+      if (driveModeIndex > driveCommands.length - 1) {
+        driveModeIndex = 0;
+      }
 
-    drivebase.setDefaultCommand(new DriveFieldCentricCommand(drivebase, controller));
+      drivebase.setDefaultCommand(driveCommands[driveModeIndex]);
+    }, drivebase));
+
+    drivebase.setDefaultCommand(driveCommands[driveModeIndex]);
   }
 
   public Command getAutonomousCommand() {

@@ -19,8 +19,14 @@ public class RobotContainer {
     configureBindings();
 
     drivebase.setDefaultCommand(Commands.run(() -> {
-      var ySpeed = MathUtil.applyDeadband(-controller.getLeftX(), 0.1) * Drivebase.kMaxSpeed;
-      var xSpeed = MathUtil.applyDeadband(-controller.getLeftY(), 0.1) * Drivebase.kMaxSpeed;
+      var ySpeed = MathUtil.applyDeadband(
+        Math.pow(-controller.getLeftX(),3), 
+        0.1
+      ) * Drivebase.kMaxSpeed;
+      var xSpeed = MathUtil.applyDeadband(
+        Math.pow(-controller.getLeftY(), 3), 
+        0.1
+      ) * Drivebase.kMaxSpeed;
       var rotSpeed = controller.getRightX() * Drivebase.kMaxAngularSpeed;
 
       drivebase.drive(xSpeed, ySpeed, rotSpeed);

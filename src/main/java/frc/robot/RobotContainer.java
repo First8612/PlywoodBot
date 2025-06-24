@@ -4,37 +4,37 @@
 
 package frc.robot;
 
-import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.commands.DriveRobotCentricCommand;
+import frc.robot.commands.DriveFieldCentricCommand;
 import frc.robot.commands.HonkCommand;
 import frc.robot.subsystems.Drivebase;
 
 public class RobotContainer {
   private Drivebase drivebase = new Drivebase();
   private CommandXboxController controller = new CommandXboxController(0);
+  private Command otherDriveCommand = new DriveRobotCentricCommand(drivebase, controller);
 
   public RobotContainer() {
     configureBindings();
 
-    drivebase.setDefaultCommand(Commands.run(() -> {
-      var ySpeed = MathUtil.applyDeadband(
-        Math.pow(-controller.getLeftX(),3), 
-        0.1
-      ) * Drivebase.kMaxSpeed;
-      var xSpeed = MathUtil.applyDeadband(
-        Math.pow(-controller.getLeftY(), 3), 
-        0.1
-      ) * Drivebase.kMaxSpeed;
-      var rotSpeed = controller.getRightX() * Drivebase.kMaxAngularSpeed;
-
-      drivebase.drive(xSpeed, ySpeed, rotSpeed);
-    }, drivebase));
+    SmartDashboard.putData(drivebase);
   }
 
   private void configureBindings() {
     controller.leftStick().whileTrue(new HonkCommand());
+
+    controller.b().onTrue(Commands.runOnce(() -> {
+      var previousDriveMode = drivebase.getDefaultCommand();
+      drivebase.setDefaultCommand(otherDriveCommand);
+      otherDriveCommand = previousDriveMode;
+      System.out.print("Switched");
+    }));
+
+    drivebase.setDefaultCommand(new DriveFieldCentricCommand(drivebase, controller));
   }
 
   public Command getAutonomousCommand() {

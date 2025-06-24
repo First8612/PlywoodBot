@@ -54,7 +54,9 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    // runs every event loop cycle (0.02sec)
+  }
 
   @Override
   public void teleopExit() {}

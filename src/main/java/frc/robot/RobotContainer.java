@@ -33,7 +33,7 @@ public class RobotContainer {
   public RobotContainer() {
     autoChooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Auto Chooser", autoChooser);
-
+    NamedCommands.registerCommand("Honker", new HonkCommand());
     configureBindings();
 
     SmartDashboard.putData(drivebase);

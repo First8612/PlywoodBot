@@ -31,7 +31,7 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    controller.leftStick().whileTrue(new HonkCommand());
+    controller.a().whileTrue(new HonkCommand());
 
     controller.b().onTrue(Commands.runOnce(() -> {
       driveModeIndex++;

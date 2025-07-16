@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.DriveRobotCentricCommand;
 import frc.robot.commands.DriveTankCommand;
+import frc.robot.commands.AimTowardAprilTag;
 import frc.robot.commands.DriveFieldCentricCommand;
 import frc.robot.commands.HonkCommand;
 import frc.robot.subsystems.Drivebase;
@@ -41,6 +42,8 @@ public class RobotContainer {
 
   private void configureBindings() {
     controller.a().whileTrue(new HonkCommand());
+
+    controller.y().whileTrue(new AimTowardAprilTag(drivebase, false));
 
     controller.b().onTrue(Commands.runOnce(() -> {
       driveModeIndex++;

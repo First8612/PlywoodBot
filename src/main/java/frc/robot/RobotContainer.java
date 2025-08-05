@@ -19,6 +19,7 @@ import frc.robot.commands.AimTowardAprilTag;
 import frc.robot.commands.AprilTagSquareUp;
 import frc.robot.commands.DriveFieldCentricCommand;
 import frc.robot.commands.HonkCommand;
+import frc.robot.commands.MagicYeet;
 import frc.robot.subsystems.Drivebase;
 
 public class RobotContainer {
@@ -47,6 +48,9 @@ public class RobotContainer {
     controller.y().whileTrue(new AimTowardAprilTag(drivebase, false));
 
     controller.rightTrigger().whileTrue(new AprilTagSquareUp(drivebase));
+
+    controller.leftTrigger().whileTrue(new MagicYeet(drivebase));
+
     controller.b().onTrue(Commands.runOnce(() -> {
       driveModeIndex++;
       if (driveModeIndex > driveCommands.length - 1) {

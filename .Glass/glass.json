@@ -5,7 +5,8 @@
         "AimTowardAprilTag": {
           "RotPID": {
             "open": true
-          }
+          },
+          "open": true
         },
         "AprilTagSquareUp": {
           "RotPID": {
@@ -32,9 +33,6 @@
       "/SmartDashboard/Pigeon 2 (v6) [30]": "Gyro",
       "/SmartDashboard/Swerve Drive": "Alerts"
     }
-  },
-  "NetworkTables Info": {
-    "visible": true
   },
   "NetworkTables Settings": {
     "mode": "Client (NT4)",

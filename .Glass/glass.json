@@ -5,6 +5,11 @@
         "AimTowardAprilTag": {
           "RotPID": {
             "open": true
+          }
+        },
+        "AprilTagSquareUp": {
+          "RotPID": {
+            "open": true
           },
           "open": true
         },
@@ -15,6 +20,7 @@
       "/FMSInfo": "FMSInfo",
       "/SmartDashboard/AimTowardAprilTag/RotPID": "PIDController",
       "/SmartDashboard/Alerts": "Alerts",
+      "/SmartDashboard/AprilTagSquareUp/RotPID": "PIDController",
       "/SmartDashboard/Auto Chooser": "String Chooser",
       "/SmartDashboard/Drivebase": "Subsystem",
       "/SmartDashboard/Encoders": "Alerts",

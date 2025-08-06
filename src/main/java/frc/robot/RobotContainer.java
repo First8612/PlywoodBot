@@ -16,8 +16,10 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.DriveRobotCentricCommand;
 import frc.robot.commands.DriveTankCommand;
 import frc.robot.commands.AimTowardAprilTag;
+import frc.robot.commands.AprilTagSquareUp;
 import frc.robot.commands.DriveFieldCentricCommand;
 import frc.robot.commands.HonkCommand;
+import frc.robot.commands.MagicYeet;
 import frc.robot.subsystems.Drivebase;
 
 public class RobotContainer {
@@ -44,6 +46,10 @@ public class RobotContainer {
     controller.a().whileTrue(new HonkCommand());
 
     controller.y().whileTrue(new AimTowardAprilTag(drivebase, false));
+
+    controller.rightTrigger().whileTrue(new AprilTagSquareUp(drivebase));
+
+    controller.leftTrigger().whileTrue(new MagicYeet(drivebase));
 
     controller.b().onTrue(Commands.runOnce(() -> {
       driveModeIndex++;

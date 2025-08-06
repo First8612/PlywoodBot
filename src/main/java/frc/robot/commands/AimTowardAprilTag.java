@@ -9,7 +9,8 @@ import frc.robot.subsystems.Drivebase;
 public class AimTowardAprilTag extends Command {
     private Drivebase drivebase;
     private boolean continuous;
-    private PIDController rotPid = new PIDController(0.04, 0.01, 0.001);
+    private PIDController rotPid = new PIDController(0.02, 0, 0);
+    //private PIDController rotPid = new PIDController(0.01, 0.003, 0.00003);
 
     public AimTowardAprilTag(Drivebase drivebase, boolean continuous) {
         super();

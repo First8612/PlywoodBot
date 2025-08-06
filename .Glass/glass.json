@@ -8,6 +8,12 @@
           },
           "open": true
         },
+        "AprilTagSquareUp": {
+          "RotPID": {
+            "open": true
+          },
+          "open": true
+        },
         "open": true
       }
     },
@@ -15,6 +21,7 @@
       "/FMSInfo": "FMSInfo",
       "/SmartDashboard/AimTowardAprilTag/RotPID": "PIDController",
       "/SmartDashboard/Alerts": "Alerts",
+      "/SmartDashboard/AprilTagSquareUp/RotPID": "PIDController",
       "/SmartDashboard/Auto Chooser": "String Chooser",
       "/SmartDashboard/Drivebase": "Subsystem",
       "/SmartDashboard/Encoders": "Alerts",
@@ -26,9 +33,6 @@
       "/SmartDashboard/Pigeon 2 (v6) [30]": "Gyro",
       "/SmartDashboard/Swerve Drive": "Alerts"
     }
-  },
-  "NetworkTables Info": {
-    "visible": true
   },
   "NetworkTables Settings": {
     "mode": "Client (NT4)",

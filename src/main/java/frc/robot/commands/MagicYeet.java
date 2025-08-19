@@ -16,7 +16,6 @@ public class MagicYeet extends Command {
     private PIDController strafePidController = new PIDController(0.3, 0, 0);
     private PIDController forwardPidController = new PIDController(0.001, 0.1, 0);
     private double desiredDistanceMeters = 1.0;
-    private Pose3d limes = LimelightHelpers.getBotPose3d("limelight-right");
 
     public MagicYeet (Drivebase drivebase) {
         super();
@@ -33,7 +32,7 @@ public class MagicYeet extends Command {
  @Override
     public void execute() {
         super.execute();
-
+        final Pose3d limes = LimelightHelpers.getBotPose3d("limelight-right");
         var limelightName = "limelight-right";
 
         if (LimelightHelpers.getFiducialID(limelightName) > -1) {
@@ -50,6 +49,7 @@ public class MagicYeet extends Command {
             SmartDashboard.putNumber("AprilTagSquareUp/strafe", strafe);
             SmartDashboard.putNumber("AimTowardAprilTag/rot", rot);
             drivebase.drive(forwardLineUp, -strafe, rot);
+            SmartDashboard.putNumber("distance", distance);
         }
 
     }

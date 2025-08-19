@@ -11,7 +11,7 @@ public class HonkCommand extends Command{
     private final TalonFX controller3 = new TalonFX(13);
     private final TalonFX controller4 = new TalonFX(12);
 
-    private final MusicTone honkTone = new MusicTone(440);
+    private final MusicTone honkTone = new MusicTone(300);
     private final MusicTone stopHonk = new MusicTone(0);
 
     public HonkCommand() {

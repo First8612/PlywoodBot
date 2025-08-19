@@ -31,7 +31,9 @@
       "/SmartDashboard/Motors": "Alerts",
       "/SmartDashboard/PathPlanner": "Alerts",
       "/SmartDashboard/Pigeon 2 (v6) [30]": "Gyro",
-      "/SmartDashboard/Swerve Drive": "Alerts"
+      "/SmartDashboard/Swerve Drive": "Alerts",
+      "/SmartDashboard/desiredDistanceMeters": "PIDController",
+      "/SmartDashboard/disiredDistanceMeters": "PIDController"
     }
   },
   "NetworkTables Settings": {

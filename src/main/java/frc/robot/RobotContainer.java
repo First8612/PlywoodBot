@@ -11,6 +11,7 @@ import com.pathplanner.lib.commands.PathPlannerAuto;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.DriveRobotCentricCommand;
@@ -47,9 +48,9 @@ public class RobotContainer {
 
     controller.y().whileTrue(new AimTowardAprilTag(drivebase, false));
 
-    controller.rightTrigger().whileTrue(new AprilTagSquareUp(drivebase));
+    controller.rightBumper().whileTrue(new AprilTagSquareUp(drivebase));
 
-    controller.leftTrigger().whileTrue(new MagicYeet(drivebase));
+    controller.leftBumper().whileTrue(new MagicYeet(drivebase));
 
     controller.b().onTrue(Commands.runOnce(() -> {
       driveModeIndex++;
@@ -61,6 +62,10 @@ public class RobotContainer {
     }, drivebase));
 
     drivebase.setDefaultCommand(driveCommands[driveModeIndex]);
+
+    controller.rightTrigger().whileTrue(new RunCommand(() -> ballgun.setSpeeds(joystickOperator.getLeftX(), joystickOperator.getLeftY(), (joystickOperator.getRightTriggerAxis() - 0.5) * 2, 1, 1)));
+    controller.rightTrigger().whileFalse(new RunCommand(() -> ballgun.setSpeeds(0,0,0,0,0)));
+    // joystickOperator.a().whileTrue(new RunCommand(() -> ballgun.testSpeeds()));
   }
 
   public Command getAutonomousCommand() {

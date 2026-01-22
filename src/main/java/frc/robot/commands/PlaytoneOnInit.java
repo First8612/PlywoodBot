@@ -4,7 +4,6 @@ import com.ctre.phoenix6.controls.MusicTone;
 import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj2.command.Command;
 
-
 public class PlaytoneOnInit extends Command {
     private final TalonFX controller1 = new TalonFX(11);
     private final TalonFX controller2 = new TalonFX(15);
@@ -14,7 +13,11 @@ public class PlaytoneOnInit extends Command {
     private final MusicTone honkTone = new MusicTone(440);
     private final MusicTone stopHonk = new MusicTone(0);
     public PlaytoneOnInit() {
-        super();
+        controller1.setControl(new MusicTone(261)); // C
+        controller2.setControl(new MusicTone(329)); // E
+        controller3.setControl(new MusicTone(392)); // G
+        controller4.setControl(new MusicTone(523)); // C (octave up)
+        // This command SHOULD play a tone on initialization and stops it when the command ends.
 
     }
     @Override
